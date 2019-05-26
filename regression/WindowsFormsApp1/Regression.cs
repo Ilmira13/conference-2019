@@ -20,7 +20,7 @@ public class Regression
         this.y = y1;
     }
 
-    unsafe public int[] NonZeroLength (double [,,] z, int m ,int n, int k)
+    public int[] NonZeroLength (double [,,] z, int m ,int n, int k)
     {
         int [] nz = new int [n];
         for (int j = 0; j < n; j++)
@@ -28,7 +28,7 @@ public class Regression
             nz[j] = 0;
             for (int i = 0; i < m; i++)
             {
-                if (z[i, j, 2] != 0)
+                if (z[i, j, 1] != 0)
                 {
                     nz[j] += 1;
                 }
@@ -38,7 +38,7 @@ public class Regression
         return nz;
     }
 
-    unsafe public double[] Mean(double  [,,] z, int m, int n, int k)
+     public double[] Mean(double  [,,] z, int m, int n, int k)
     {
         double [] mn = new double [n];
         for (int j = 0; j < n; j++)
@@ -46,13 +46,13 @@ public class Regression
             mn[j] = 0;
             for (int i = 0; i < m; i++)
             {
-                if (z[i, j, 2] != 1)
+                if (z[i, j, 1] != 1)
                 {
                     mn[j] += z[i, j, 1];
 
                 }
             }
-            mn[j] = mn[j] / NonZeroLength(z, m, m, k)[j];
+            mn[j] = mn[j] / NonZeroLength(z, m, n, k)[j];
 
         }
         return mn;

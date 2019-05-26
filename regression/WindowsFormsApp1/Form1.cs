@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace WindowsFormsApp1
 {
 
-    unsafe public partial class Form1 : Form
+     public partial class Form1 : Form
     {
         Microsoft.Office.Interop.Excel.Application ObjExcel = new Microsoft.Office.Interop.Excel.Application();
         string range;
@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        unsafe private void button1_Click(object sender, EventArgs e)
+         private void button1_Click(object sender, EventArgs e)
         {
             {      
                 ObjExcel.Visible = true;
@@ -36,22 +36,22 @@ namespace WindowsFormsApp1
                 Microsoft.Office.Interop.Excel.Worksheet ObjWorkSheet;
                 ObjWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ObjWorkBook.Sheets[1];
 
-                for (int i = 1; i < 100; i++)
+                for (int i = 1; i < 23; i++)
                 {
                     range = ObjWorkSheet.get_Range("A" + i.ToString()).Text.ToString();
                     if (range == "")
                     {
-                        Telephons[i - 1, 1, 1] = 0;
-                        Telephons[i - 1, 1, 2] = 1; // признак замены null на 0
+                        Telephons[i - 1, 0, 0] = 0;
+                        Telephons[i - 1, 0, 1] = 1; // признак замены null на 0
                        // Telephons_flag[i - 1] = 1; // признак замены null на 0
                     }
                     else
                     {
-                        Telephons[i - 1, 1, 1] = Convert.ToDouble(range);
+                        Telephons[i - 1, 0, 1] = Convert.ToDouble(range);
                     }
                 }
                 Regression Regression1 = new Regression(Telephons);
-                double Mean = Regression1.Mean(Telephons, 100, 1, 2);           
+                double [] Mean = Regression1.Mean(Telephons, 100, 1, 2);           
             }
         }
 
